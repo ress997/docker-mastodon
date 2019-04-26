@@ -3,7 +3,7 @@ services:
 
   db:
     restart: always
-    image: postgres:10.7-alpine
+    image: postgres:11.2-alpine
     environment:
       - TZ=Japan
     networks:
