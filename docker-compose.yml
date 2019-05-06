@@ -38,6 +38,7 @@ services:
 #      - ./elasticsearch:/usr/share/elasticsearch/data
 
   web:
+#    build: app
     image: tootsuite/mastodon:v2.8.2
     restart: always
     environment:
@@ -45,14 +46,9 @@ services:
       - TZ=Japan
       - WEB_CONCURRENCY=1
       - MAX_THREADS=5
-      - RUBY_GC_HEAP_INIT_SLOTS=500000
-      - RUBY_GC_HEAP_GROWTH_FACTOR=1.2
-      - RUBY_GC_HEAP_GROWTH_MAX_SLOTS=1000000
-      - RUBY_GC_HEAP_FREE_SLOTS_MIN_RATIO=0.1
-      - RUBY_GC_HEAP_FREE_SLOTS_MAX_RATIO=0.3
-      - RUBY_GC_HEAP_OLDOBJECT_LIMIT_FACTOR=1.2
-      - RUBY_GC_OLDMALLOC_LIMIT_MAX=67108864
-    env_file: .env.production
+    env_file:
+      - .env.production
+      - .env.ruby
     command: bash -c "rm -f /mastodon/tmp/pids/server.pid; bundle exec rails s -p 3000 -b '0.0.0.0'"
     networks:
       - front
@@ -69,6 +65,7 @@ services:
       - ./public/system:/mastodon/public/system
 
   streaming:
+#    build: app
     image: tootsuite/mastodon:v2.8.2
     restart: always
     environment:
@@ -87,18 +84,14 @@ services:
       - redis
 
   sidekiq:
+#    build: app
     image: tootsuite/mastodon:v2.8.2
     restart: always
     environment:
       - TZ=Japan
-      - RUBY_GC_HEAP_INIT_SLOTS=500000
-      - RUBY_GC_HEAP_GROWTH_FACTOR=1.2
-      - RUBY_GC_HEAP_GROWTH_MAX_SLOTS=1000000
-      - RUBY_GC_HEAP_FREE_SLOTS_MIN_RATIO=0.1
-      - RUBY_GC_HEAP_FREE_SLOTS_MAX_RATIO=0.3
-      - RUBY_GC_HEAP_OLDOBJECT_LIMIT_FACTOR=1.2
-      - RUBY_GC_OLDMALLOC_LIMIT_MAX=67108864
-    env_file: .env.production
+    env_file:
+      - .env.production
+      - .env.ruby
     command: bundle exec sidekiq -c 15 -q default -q mailers -q push -q pull
     depends_on:
       - db
@@ -110,18 +103,14 @@ services:
       - ./public/system:/mastodon/public/system
 
 #  sidekiq-default:
+##    build: app
 #    image: tootsuite/mastodon:v2.8.2
 #    restart: always
 #    environment:
 #      - TZ=Japan
-#      - RUBY_GC_HEAP_INIT_SLOTS=500000
-#      - RUBY_GC_HEAP_GROWTH_FACTOR=1.2
-#      - RUBY_GC_HEAP_GROWTH_MAX_SLOTS=1000000
-#      - RUBY_GC_HEAP_FREE_SLOTS_MIN_RATIO=0.1
-#      - RUBY_GC_HEAP_FREE_SLOTS_MAX_RATIO=0.3
-#      - RUBY_GC_HEAP_OLDOBJECT_LIMIT_FACTOR=1.2
-#      - RUBY_GC_OLDMALLOC_LIMIT_MAX=67108864
-#    env_file: .env.production
+#    env_file:
+#      - .env.production
+#      - .env.ruby
 #    command: bundle exec sidekiq -c 10 -q default
 #    depends_on:
 #      - db
@@ -133,18 +122,14 @@ services:
 #      - ./public/system:/mastodon/public/system
 
 #  sidekiq-pullpush:
+##    build: app
 #    image: tootsuite/mastodon:v2.8.2
 #    restart: always
 #    environment:
 #      - TZ=Japan
-#      - RUBY_GC_HEAP_INIT_SLOTS=500000
-#      - RUBY_GC_HEAP_GROWTH_FACTOR=1.2
-#      - RUBY_GC_HEAP_GROWTH_MAX_SLOTS=1000000
-#      - RUBY_GC_HEAP_FREE_SLOTS_MIN_RATIO=0.1
-#      - RUBY_GC_HEAP_FREE_SLOTS_MAX_RATIO=0.3
-#      - RUBY_GC_HEAP_OLDOBJECT_LIMIT_FACTOR=1.2
-#      - RUBY_GC_OLDMALLOC_LIMIT_MAX=67108864
-#    env_file: .env.production
+#    env_file:
+#      - .env.production
+#      - .env.ruby
 #    command: bundle exec sidekiq -c 5 -q pull -q push
 #    depends_on:
 #      - db
@@ -156,18 +141,14 @@ services:
 #      - ./public/system:/mastodon/public/system
 
 #  sidekiq-mail:
+##    build: app
 #    image: tootsuite/mastodon:v2.8.2
 #    restart: always
 #    environment:
 #      - TZ=Japan
-#      - RUBY_GC_HEAP_INIT_SLOTS=500000
-#      - RUBY_GC_HEAP_GROWTH_FACTOR=1.2
-#      - RUBY_GC_HEAP_GROWTH_MAX_SLOTS=1000000
-#      - RUBY_GC_HEAP_FREE_SLOTS_MIN_RATIO=0.1
-#      - RUBY_GC_HEAP_FREE_SLOTS_MAX_RATIO=0.3
-#      - RUBY_GC_HEAP_OLDOBJECT_LIMIT_FACTOR=1.2
-#      - RUBY_GC_OLDMALLOC_LIMIT_MAX=67108864
-#    env_file: .env.production
+#    env_file:
+#      - .env.production
+#      - .env.ruby
 #    command: bundle exec sidekiq -c 1 -q mailers
 #    depends_on:
 #      - db
