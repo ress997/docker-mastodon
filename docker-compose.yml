@@ -38,7 +38,7 @@ services:
 #      - ./elasticsearch:/usr/share/elasticsearch/data
 
   web:
-    image: tootsuite/mastodon:v2.8.1
+    image: tootsuite/mastodon:v2.8.2
     restart: always
     environment:
       - GITHUB_REPOSITORY="ress997/docker-mastodon"
@@ -69,7 +69,7 @@ services:
       - ./public/system:/mastodon/public/system
 
   streaming:
-    image: tootsuite/mastodon:v2.8.1
+    image: tootsuite/mastodon:v2.8.2
     restart: always
     environment:
       - TZ=Japan
@@ -87,7 +87,7 @@ services:
       - redis
 
   sidekiq:
-    image: tootsuite/mastodon:v2.8.1
+    image: tootsuite/mastodon:v2.8.2
     restart: always
     environment:
       - TZ=Japan
@@ -110,7 +110,7 @@ services:
       - ./public/system:/mastodon/public/system
 
 #  sidekiq-default:
-#    image: tootsuite/mastodon:v2.8.1
+#    image: tootsuite/mastodon:v2.8.2
 #    restart: always
 #    environment:
 #      - TZ=Japan
@@ -133,7 +133,7 @@ services:
 #      - ./public/system:/mastodon/public/system
 
 #  sidekiq-pullpush:
-#    image: tootsuite/mastodon:v2.8.1
+#    image: tootsuite/mastodon:v2.8.2
 #    restart: always
 #    environment:
 #      - TZ=Japan
@@ -156,7 +156,7 @@ services:
 #      - ./public/system:/mastodon/public/system
 
 #  sidekiq-mail:
-#    image: tootsuite/mastodon:v2.8.1
+#    image: tootsuite/mastodon:v2.8.2
 #    restart: always
 #    environment:
 #      - TZ=Japan
