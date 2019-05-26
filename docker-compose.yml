@@ -39,7 +39,7 @@ services:
 
   web:
 #    build: app
-    image: tootsuite/mastodon:v2.8.3
+    image: tootsuite/mastodon:v2.8.4
     restart: always
     environment:
       - GITHUB_REPOSITORY="ress997/docker-mastodon"
@@ -66,7 +66,7 @@ services:
 
   streaming:
 #    build: app
-    image: tootsuite/mastodon:v2.8.3
+    image: tootsuite/mastodon:v2.8.4
     restart: always
     environment:
       - TZ=Japan
@@ -85,7 +85,7 @@ services:
 
   sidekiq:
 #    build: app
-    image: tootsuite/mastodon:v2.8.3
+    image: tootsuite/mastodon:v2.8.4
     restart: always
     environment:
       - TZ=Japan
@@ -104,7 +104,7 @@ services:
 
 #  sidekiq-default:
 ##    build: app
-#    image: tootsuite/mastodon:v2.8.3
+#    image: tootsuite/mastodon:v2.8.4
 #    restart: always
 #    environment:
 #      - TZ=Japan
@@ -123,7 +123,7 @@ services:
 
 #  sidekiq-pullpush:
 ##    build: app
-#    image: tootsuite/mastodon:v2.8.3
+#    image: tootsuite/mastodon:v2.8.4
 #    restart: always
 #    environment:
 #      - TZ=Japan
@@ -142,7 +142,7 @@ services:
 
 #  sidekiq-mail:
 ##    build: app
-#    image: tootsuite/mastodon:v2.8.3
+#    image: tootsuite/mastodon:v2.8.4
 #    restart: always
 #    environment:
 #      - TZ=Japan
