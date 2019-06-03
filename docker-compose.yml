@@ -42,7 +42,7 @@ services:
     image: tootsuite/mastodon:v2.8.4
     restart: always
     environment:
-      - GITHUB_REPOSITORY="ress997/docker-mastodon"
+      - GITHUB_REPOSITORY=ress997/docker-mastodon
       - TZ=Japan
       - WEB_CONCURRENCY=1
       - MAX_THREADS=5
