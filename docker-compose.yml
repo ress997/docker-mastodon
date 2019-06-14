@@ -83,6 +83,25 @@ services:
       - db
       - redis
 
+#  streaming:
+#    build: streaming
+#    image: tootsuite/ragequit
+#    restart: always
+#    environment:
+#      RUST_BACKTRACE: 1
+#    env_file: .env.production
+#    command: /opt/mastodon/ragequit
+#    networks:
+#      - front
+#      - back
+#    healthcheck:
+#      test: ["CMD-SHELL", "wget -q --spider --header 'x-forwarded-proto: https' --proxy=off localhost:4000/api/v1/streaming/health || exit 1"]
+#    ports:
+#      - "127.0.0.1:4000:4000"
+#    depends_on:
+#      - db
+#      - redis
+
   sidekiq:
 #    build: app
     image: tootsuite/mastodon:v2.9.0
