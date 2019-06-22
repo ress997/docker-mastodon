@@ -83,28 +83,6 @@ services:
       - db
       - redis
 
-#  streaming:
-#    build: streaming
-#    image: tootsuite/ragequit
-#    restart: always
-#    environment:
-#      - TZ=Japan
-#      - RUST_BACKTRACE=1
-#    env_file: .env.production
-#    command: /opt/mastodon/ragequit
-#    networks:
-#      - front
-#      - back
-#    healthcheck:
-#      test: ["CMD-SHELL", "wget -q --spider --header 'x-forwarded-proto: https' --proxy=off localhost:4000/api/v1/streaming/health || exit 1"]
-#    ports:
-#      - "127.0.0.1:4000:4000"
-#    depends_on:
-#      - db
-#      - redis
-#    volumes:
-#      - ./streaming/.env:/opt/mastodon/.env
-
   sidekiq:
 #    build: app
     image: tootsuite/mastodon:v2.9.0
@@ -123,63 +101,6 @@ services:
       - back
     volumes:
       - ./public/system:/mastodon/public/system
-
-#  sidekiq-default:
-##    build: app
-#    image: tootsuite/mastodon:v2.9.0
-#    restart: always
-#    environment:
-#      - TZ=Japan
-#    env_file:
-#      - .env.production
-#      - .env.ruby
-#    command: bundle exec sidekiq -c 10 -q default
-#    depends_on:
-#      - db
-#      - redis
-#    networks:
-#      - front
-#      - back
-#    volumes:
-#      - ./public/system:/mastodon/public/system
-
-#  sidekiq-pullpush:
-##    build: app
-#    image: tootsuite/mastodon:v2.9.0
-#    restart: always
-#    environment:
-#      - TZ=Japan
-#    env_file:
-#      - .env.production
-#      - .env.ruby
-#    command: bundle exec sidekiq -c 5 -q pull -q push
-#    depends_on:
-#      - db
-#      - redis
-#    networks:
-#      - front
-#      - back
-#    volumes:
-#      - ./public/system:/mastodon/public/system
-
-#  sidekiq-mail:
-##    build: app
-#    image: tootsuite/mastodon:v2.9.0
-#    restart: always
-#    environment:
-#      - TZ=Japan
-#    env_file:
-#      - .env.production
-#      - .env.ruby
-#    command: bundle exec sidekiq -c 1 -q mailers
-#    depends_on:
-#      - db
-#      - redis
-#    networks:
-#      - front
-#      - back
-#    volumes:
-#      - ./public/system:/mastodon/public/system
 
 ## Uncomment to enable federation with tor instances along with adding the following ENV variables
 ## http_proxy=http://privoxy:8118

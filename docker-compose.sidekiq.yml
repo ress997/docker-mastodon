@@ -1,0 +1,60 @@
+version: '3'
+services:
+
+#  sidekiq-default:
+##    build: app
+#    image: tootsuite/mastodon:v2.9.0
+#    restart: always
+#    environment:
+#      - TZ=Japan
+#    env_file:
+#      - .env.production
+#      - .env.ruby
+#    command: bundle exec sidekiq -c 10 -q default
+#    depends_on:
+#      - db
+#      - redis
+#    networks:
+#      - front
+#      - back
+#    volumes:
+#      - ./public/system:/mastodon/public/system
+
+#  sidekiq-pullpush:
+##    build: app
+#    image: tootsuite/mastodon:v2.9.0
+#    restart: always
+#    environment:
+#      - TZ=Japan
+#    env_file:
+#      - .env.production
+#      - .env.ruby
+#    command: bundle exec sidekiq -c 5 -q pull -q push
+#    depends_on:
+#      - db
+#      - redis
+#    networks:
+#      - front
+#      - back
+#    volumes:
+#      - ./public/system:/mastodon/public/system
+
+#  sidekiq-mail:
+##    build: app
+#    image: tootsuite/mastodon:v2.9.0
+#    restart: always
+#    environment:
+#      - TZ=Japan
+#    env_file:
+#      - .env.production
+#      - .env.ruby
+#    command: bundle exec sidekiq -c 1 -q mailers
+#    depends_on:
+#      - db
+#      - redis
+#    networks:
+#      - front
+#      - back
+#    volumes:
+#      - ./public/system:/mastodon/public/system
+
