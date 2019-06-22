@@ -3,7 +3,7 @@ services:
 
 #  sidekiq-default:
 ##    build: app
-#    image: tootsuite/mastodon:v2.9.0
+#    image: tootsuite/mastodon
 #    restart: always
 #    environment:
 #      - TZ=Japan
@@ -22,7 +22,7 @@ services:
 
 #  sidekiq-pullpush:
 ##    build: app
-#    image: tootsuite/mastodon:v2.9.0
+#    image: tootsuite/mastodon
 #    restart: always
 #    environment:
 #      - TZ=Japan
@@ -41,7 +41,7 @@ services:
 
 #  sidekiq-mail:
 ##    build: app
-#    image: tootsuite/mastodon:v2.9.0
+#    image: tootsuite/mastodon
 #    restart: always
 #    environment:
 #      - TZ=Japan
