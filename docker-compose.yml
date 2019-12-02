@@ -3,7 +3,7 @@ services:
 
   db:
     restart: always
-    image: postgres:11.3-alpine
+    image: postgres:12-alpine
     environment:
       - TZ=Japan
     networks:
@@ -15,7 +15,7 @@ services:
 
   redis:
     restart: always
-    image: redis:5.0-alpine
+    image: redis:5-alpine
     environment:
       - TZ=Japan
     networks:
@@ -39,7 +39,7 @@ services:
 
   web:
 #    build: app
-    image: tootsuite/mastodon:v2.9.2
+    image: tootsuite/mastodon:v3.0.1
     restart: always
     environment:
       - GITHUB_REPOSITORY=ress997/docker-mastodon
@@ -49,12 +49,12 @@ services:
     env_file:
       - .env.production
       - .env.ruby
-    command: bash -c "rm -f /mastodon/tmp/pids/server.pid; bundle exec rails s -p 3000 -b '0.0.0.0'"
+    command: bash -c "rm -f /mastodon/tmp/pids/server.pid; bundle exec rails s -p 3000"
     networks:
       - front
       - back
     healthcheck:
-      test: ["CMD-SHELL", "wget -q --spider --header 'x-forwarded-proto: https' --proxy=off localhost:3000/api/v1/instance || exit 1"]
+      test: ["CMD-SHELL", "wget -q --spider --proxy=off localhost:3000/health || exit 1"]
     ports:
       - "127.0.0.1:3000:3000"
     depends_on:
@@ -66,17 +66,17 @@ services:
 
   streaming:
 #    build: app
-    image: tootsuite/mastodon:v2.9.2
+    image: tootsuite/mastodon:v3.0.1
     restart: always
     environment:
       - TZ=Japan
     env_file: .env.production
-    command: node ./streaming/index.js
+    command: node ./streaming
     networks:
       - front
       - back
     healthcheck:
-      test: ["CMD-SHELL", "wget -q --spider --header 'x-forwarded-proto: https' --proxy=off localhost:4000/api/v1/streaming/health || exit 1"]
+      test: ["CMD-SHELL", "wget -q --spider --proxy=off localhost:4000/api/v1/streaming/health || exit 1"]
     ports:
       - "127.0.0.1:4000:4000"
     depends_on:
@@ -85,7 +85,7 @@ services:
 
   sidekiq:
 #    build: app
-    image: tootsuite/mastodon:v2.9.2
+    image: tootsuite/mastodon:v3.0.1
     restart: always
     environment:
       - TZ=Japan
