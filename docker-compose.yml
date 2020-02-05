@@ -83,6 +83,25 @@ services:
       - db
       - redis
 
+#  flodgatt:
+#    build: flodgatt
+#    image: tootsuite/flodgatt
+#    restart: always
+#    environment:
+#      - TZ=Japan
+#    env_file: .env.production
+#    command: /flodgatt
+#    networks:
+#      - front
+#      - back
+#    healthcheck:
+#      test: ["CMD-SHELL", "wget -q --spider --proxy=off localhost:4000/api/v1/streaming/health || exit 1"]
+#    ports:
+#      - "127.0.0.1:4000:4000"
+#    depends_on:
+#      - db
+#      - redis
+
   sidekiq:
 #    build: app
     image: tootsuite/mastodon:v3.0.1
