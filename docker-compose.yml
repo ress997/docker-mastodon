@@ -28,12 +28,7 @@ services:
     restart: always
     environment:
       - GITHUB_REPOSITORY=ress997/docker-mastodon
-      - TZ=Japan
-#      - WEB_CONCURRENCY=1
-#      - MAX_THREADS=5
-    env_file:
-      - .env.production
-      - .env.ruby
+    env_file: .env.production
     command: bash -c "rm -f /mastodon/tmp/pids/server.pid; bundle exec rails s -p 3000"
     networks:
       - front
@@ -52,8 +47,6 @@ services:
 #    build: app
     image: tootsuite/mastodon:v3.1.4
     restart: always
-    environment:
-      - TZ=Japan
     env_file: .env.production
     command: node ./streaming
     networks:
@@ -71,8 +64,6 @@ services:
 #    build: flodgatt
 #    image: tootsuite/flodgatt
 #    restart: always
-#    environment:
-#      - TZ=Japan
 #    env_file: .env.production
 #    command: /flodgatt
 #    networks:
@@ -90,11 +81,7 @@ services:
 #    build: app
     image: tootsuite/mastodon:v3.1.4
     restart: always
-    environment:
-      - TZ=Japan
-    env_file:
-      - .env.production
-      - .env.ruby
+    env_file: .env.production
     command: bundle exec sidekiq -c 15 -q default -q mailers -q push -q pull
     depends_on:
       - db
