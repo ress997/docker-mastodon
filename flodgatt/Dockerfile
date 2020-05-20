@@ -24,8 +24,8 @@ RUN echo "${TINI_SUM} tini" | sha256sum -c - && \
 	chmod +x /tini
 
 # Install Flodgatt
-ENV FG_VER="v0.8.2"
-ENV FG_SUM="bd9528547cef70cbcf6ce2a22b190c7ca2db9a1544d23c56baad31d062a79ab1"
+ENV FG_VER="v0.9.9"
+ENV FG_SUM="9fa9d89eac0d3858bb8d2c4ae14c51e5056f8f07b408c0662e8385d0394ef46a"
 ADD --chown=mastodon:mastodon https://github.com/tootsuite/flodgatt/releases/download/${FG_VER}/flodgatt /flodgatt
 RUN echo "${FG_SUM} /flodgatt" | sha256sum -c - && \
 	chmod +x /flodgatt
