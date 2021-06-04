@@ -1,0 +1,18 @@
+version: '3'
+services:
+  streaming:
+    build: flodgatt
+    image: tootsuite/flodgatt
+    restart: always
+    env_file: .env.production
+    command: /flodgatt
+    networks:
+      - front
+      - back
+    healthcheck:
+      test: ["CMD-SHELL", "wget -q --spider --proxy=off localhost:4000/api/v1/streaming/health || exit 1"]
+    ports:
+      - "127.0.0.1:4000:4000"
+    depends_on:
+      - db
+      - redis

@@ -3,7 +3,7 @@ services:
 
   db:
     restart: always
-    image: postgres:12-alpine
+    image: postgres:13-alpine
     shm_size: 256mb
     networks:
       - back
@@ -23,8 +23,7 @@ services:
       - ./redis:/data
 
   web:
-#    build: app
-    image: tootsuite/mastodon:v3.1.4
+    image: tootsuite/mastodon:${TAG}
     restart: always
     environment:
       - GITHUB_REPOSITORY=ress997/docker-mastodon
@@ -44,8 +43,7 @@ services:
       - ./public/system:/mastodon/public/system
 
   streaming:
-#    build: app
-    image: tootsuite/mastodon:v3.1.4
+    image: tootsuite/mastodon:${TAG}
     restart: always
     env_file: .env.production
     command: node ./streaming
@@ -60,26 +58,8 @@ services:
       - db
       - redis
 
-#  flodgatt:
-#    build: flodgatt
-#    image: tootsuite/flodgatt
-#    restart: always
-#    env_file: .env.production
-#    command: /flodgatt
-#    networks:
-#      - front
-#      - back
-#    healthcheck:
-#      test: ["CMD-SHELL", "wget -q --spider --proxy=off localhost:4000/api/v1/streaming/health || exit 1"]
-#    ports:
-#      - "127.0.0.1:4000:4000"
-#    depends_on:
-#      - db
-#      - redis
-
   sidekiq:
-#    build: app
-    image: tootsuite/mastodon:v3.1.4
+    image: tootsuite/mastodon:${TAG}
     restart: always
     env_file: .env.production
     command: bundle exec sidekiq -c 15 -q default -q mailers -q push -q pull
